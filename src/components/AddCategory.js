@@ -1,45 +1,43 @@
-import React,{useState} from 'react';
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import '../styles/components/AddCategory.css';
 
-export const AddCategory = ({setCategories}) => {
-   const [inputValue, setInputValue] = useState("");
+export const AddCategory = ({ setCategories }) => {
 
-   const handleInputValue = (e) => {
-      /*Básicamente, trae el valor de cualquier input al que se solicitó.
-      En este caso, es el elemento input, por lo que se puede acceder a todo lo que inserte 
-      en su input a través de e.target.value*/
-      setInputValue(e.target.value)
-      //el state sera lo que sea que este en el input
-   } 
 
-   const handleSubmit = (e) => {
-      e.preventDefault();
-      // console.log("formulario enviado");
+     const [inputValue, setInputValue] = useState('');
 
-      if (inputValue.trim().length > 2) {
-         // setCategories( category => [...category, inputValue]);
-         setCategories([inputValue]);
-         /*no puedo llamar el primer elemento del state del otro componente porque desde este com-
-         ponente no tengo acceso a el como tal, y como el estado actual de la categoria tambien se
-         puede llamar con un callback lo hago de esa forma, y el parametro representaria el estado
-         actual del state */
+     const handleInputChange = (e) => {
+          setInputValue(e.target.value)
+     }
 
-         setInputValue("");
-      }
-   }
+     const handleSubmit = (e) => {
+          e.preventDefault();
 
-   return (
-      <form onSubmit={handleSubmit}>
-         <input
-            type="text"
-            value={inputValue}   
-            /*onChange permite escuchar el cambio de valor de un input */
-            onChange={handleInputValue}
-         />
-      </form>
-   )
+          if (inputValue.trim().length > 2) {
+               setCategories(categories => {
+                    let y = [...categories].filter(c => c !== inputValue)
+                    return [inputValue, ...y];
+               });
+
+               setInputValue('');
+          }
+     }
+
+     return (
+          <>
+               <form onSubmit={handleSubmit}>
+                    <input
+                         type='text'
+                         value={inputValue}
+                         onChange={handleInputChange}
+                    />
+                    <button type='submit'>Submit</button>
+               </form>
+          </>
+     )
 }
 
 AddCategory.propTypes = {
-   setCategories: PropTypes.func.isRequired
+     setCategories: PropTypes.func.isRequired
 }

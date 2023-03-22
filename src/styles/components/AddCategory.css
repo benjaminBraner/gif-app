@@ -1,0 +1,22 @@
+input {
+   max-width: 500px;
+   margin: 10px 5px 10px 10px;
+   padding: 6px;
+   font-size: 17px;
+
+}
+
+button {
+   background-color: rgb(60, 145, 241);
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   padding: 6px;
+   margin: 10px 10px 10px 5px;
+   font-size: 17px;
+   cursor: pointer;
+}
+
+button:hover {
+   background-color: rgb(17, 97, 189);
+}
