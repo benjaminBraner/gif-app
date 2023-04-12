@@ -6,6 +6,7 @@ input {
    color: gray;
    font-size: 1.2;
    width: 60%;
+   outline: none;
 }
 .card-grid {
    display: flex;
